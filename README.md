@@ -9,8 +9,9 @@ Stack:
 
 ## Configuração
 
-1. Copie `.env.example` para `.env.local` e preencha com a URL e a anon key do projeto Supabase (Project Settings > API).
-   - **Nunca** coloque a `service_role key` no `.env.local` do frontend nem no repositório — ela só deve existir como secret de Edge Functions/servidor.
+1. Copie `.env.example` para `.env.local` e preencha com a URL e a publishable key do projeto Supabase (Project Settings > API).
+   - Na Vercel, a integração Supabase↔Vercel já injeta `NEXT_PUBLIC_SUPABASE_URL` (gerenciada/locked) e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` automaticamente.
+   - **Nunca** coloque a `service_role key`/`secret key` no `.env.local` do frontend nem no repositório — ela só deve existir como secret de Edge Functions/servidor.
 2. Instale as dependências:
 
    ```bash
