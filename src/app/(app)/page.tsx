@@ -1,19 +1,23 @@
 import { createClient } from "@/lib/supabase/server";
-
-// Placeholder stats until Clients / Priorities / Decisions modules exist.
-const stats = [
-  { label: "Active Clients", value: "—" },
-  { label: "Priorities", value: "—" },
-  { label: "Decisions", value: "—" },
-];
+import { getLocale } from "@/lib/i18n/get-locale";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 export default async function Home() {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const locale = await getLocale();
+  const t = getDictionary(locale);
 
-  const today = new Date().toLocaleDateString("en-US", {
+  // Placeholder stats until Clients / Priorities / Decisions modules exist.
+  const stats = [
+    { label: t.dashboard.activeClients, value: "—" },
+    { label: t.dashboard.priorities, value: "—" },
+    { label: t.dashboard.decisions, value: "—" },
+  ];
+
+  const today = new Date().toLocaleDateString(locale === "pt" ? "pt-BR" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -23,10 +27,11 @@ export default async function Home() {
     <div className="mx-auto flex max-w-4xl flex-col gap-10">
       <div>
         <h1 className="font-display text-[34px] leading-tight text-charcoal">
-          Good morning{user?.email ? `, ${user.email.split("@")[0]}` : ""}.
+          {t.dashboard.greeting}
+          {user?.email ? `, ${user.email.split("@")[0]}` : ""}.
         </h1>
         <p className="mt-1 font-editorial text-lg text-text-secondary">
-          Your advisory office
+          {t.dashboard.subtitle}
         </p>
         <p className="font-ui text-[13px] text-text-muted">{today}</p>
       </div>
@@ -46,31 +51,28 @@ export default async function Home() {
 
       <section className="flex flex-col gap-3">
         <h2 className="font-ui text-[11px] uppercase tracking-[0.06em] text-text-muted">
-          Today
+          {t.dashboard.today}
         </h2>
         <p className="font-editorial text-base text-text-secondary">
-          No priorities scheduled yet. Once clients and tasks are registered,
-          today&apos;s agenda will appear here.
+          {t.dashboard.todayEmpty}
         </p>
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-ui text-[11px] uppercase tracking-[0.06em] text-text-muted">
-          Recent Intelligence
+          {t.dashboard.recentIntelligence}
         </h2>
         <p className="font-editorial text-base text-text-secondary">
-          Insights, decisions and opportunities will be summarized here as
-          they are recorded.
+          {t.dashboard.recentIntelligenceEmpty}
         </p>
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-ui text-[11px] uppercase tracking-[0.06em] text-text-muted">
-          This Week
+          {t.dashboard.thisWeek}
         </h2>
         <p className="font-editorial text-base text-text-secondary">
-          Meetings, tasks, reviews and reports for the week will be listed
-          here.
+          {t.dashboard.thisWeekEmpty}
         </p>
       </section>
     </div>
