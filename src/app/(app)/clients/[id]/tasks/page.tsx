@@ -6,35 +6,27 @@ import { TaskStatusSelect } from "@/components/tasks/task-status-select";
 import { createTask } from "@/app/actions/tasks";
 import { Badge, STATUS_TONES } from "@/components/ui/badge";
 
-export default async function TasksPage() {
+export default async function ClientTasksPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const locale = await getLocale();
   const t = getDictionary(locale);
   const supabase = await createClient();
 
-  const [{ data: tasks }, { data: clients }] = await Promise.all([
-    supabase
-      .from("tasks")
-      .select(
-        "id, title, due_date, status, priority, client_id, clients(full_name)",
-      )
-      .order("due_date", { ascending: true, nullsFirst: false }),
-    supabase.from("clients").select("id, full_name").order("full_name"),
-  ]);
+  const { data: tasks } = await supabase
+    .from("tasks")
+    .select("id, title, due_date, status, priority")
+    .eq("client_id", id)
+    .order("due_date", { ascending: true, nullsFirst: false });
 
-  const boundCreate = createTask.bind(null, null);
+  const boundCreate = createTask.bind(null, id);
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="font-display text-[28px] text-charcoal">
-          {t.tasksModule.title}
-        </h1>
-        <p className="font-editorial text-sm text-text-secondary">
-          {t.tasksModule.subtitle}
-        </p>
-      </div>
-
-      <TaskForm t={t} action={boundCreate} clients={clients ?? []} />
+      <TaskForm t={t} action={boundCreate} />
 
       {!tasks || tasks.length === 0 ? (
         <p className="font-editorial text-base text-text-secondary">
@@ -46,9 +38,6 @@ export default async function TasksPage() {
             <tr className="border-b border-border text-left">
               <th className="py-2 pr-4 text-[11px] font-normal uppercase tracking-[0.06em] text-text-muted">
                 {t.tasksModule.table.title}
-              </th>
-              <th className="py-2 pr-4 text-[11px] font-normal uppercase tracking-[0.06em] text-text-muted">
-                {t.tasksModule.table.client}
               </th>
               <th className="py-2 pr-4 text-[11px] font-normal uppercase tracking-[0.06em] text-text-muted">
                 {t.tasksModule.table.dueDate}
@@ -68,9 +57,6 @@ export default async function TasksPage() {
                 className="border-b border-border last:border-0"
               >
                 <td className="py-2 pr-4 text-text-primary">{task.title}</td>
-                <td className="py-2 pr-4 text-text-secondary">
-                  {task.clients?.[0]?.full_name ?? t.tasksModule.unassigned}
-                </td>
                 <td className="py-2 pr-4 text-text-secondary">
                   {task.due_date
                     ? new Date(task.due_date).toLocaleDateString(

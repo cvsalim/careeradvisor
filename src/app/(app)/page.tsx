@@ -10,10 +10,30 @@ export default async function Home() {
   const locale = await getLocale();
   const t = getDictionary(locale);
 
-  // Placeholder stats until Clients / Priorities / Decisions modules exist.
+  const [activeClientsResult, highPriorityActionsResult, highPriorityTasksResult] =
+    await Promise.all([
+      supabase
+        .from("clients")
+        .select("id", { count: "exact", head: true })
+        .eq("relationship_status", "active"),
+      supabase
+        .from("career_actions")
+        .select("id", { count: "exact", head: true })
+        .eq("priority", "high")
+        .not("status", "in", "(done,cancelled)"),
+      supabase
+        .from("tasks")
+        .select("id", { count: "exact", head: true })
+        .eq("priority", "high")
+        .not("status", "in", "(done,cancelled)"),
+    ]);
+
+  const priorityCount =
+    (highPriorityActionsResult.count ?? 0) + (highPriorityTasksResult.count ?? 0);
+
   const stats = [
-    { label: t.dashboard.activeClients, value: "—" },
-    { label: t.dashboard.priorities, value: "—" },
+    { label: t.dashboard.activeClients, value: String(activeClientsResult.count ?? 0) },
+    { label: t.dashboard.priorities, value: String(priorityCount) },
     { label: t.dashboard.decisions, value: "—" },
   ];
 
