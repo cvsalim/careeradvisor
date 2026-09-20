@@ -1,33 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Advisor Career Office
 
-## Getting Started
+Aplicação interna de Career & Branding Advisory. Ver [PRD_Private_Career_Office.md](./PRD_Private_Career_Office.md) para escopo completo.
 
-First, run the development server:
+Stack:
+
+- Next.js (App Router) + TypeScript + Tailwind CSS.
+- Supabase: banco Postgres, autenticação, storage e edge functions.
+
+## Configuração
+
+1. Copie `.env.example` para `.env.local` e preencha com a URL e a anon key do projeto Supabase (Project Settings > API).
+   - **Nunca** coloque a `service_role key` no `.env.local` do frontend nem no repositório — ela só deve existir como secret de Edge Functions/servidor.
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Rode o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+Abra [http://localhost:3000](http://localhost:3000).
+
+## Supabase
+
+O projeto Supabase remoto já está linkado via Supabase CLI (`supabase link`). Estrutura:
+
+- `supabase/migrations/` — migrações SQL (schema + storage buckets), aplicadas com `supabase db push`.
+- `supabase/functions/` — Edge Functions (a criar conforme os módulos de IA do PRD).
+- `supabase/config.toml` — configuração do projeto.
+
+Para criar uma nova migração:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+supabase migration new nome_da_migracao
+supabase db push
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para criar uma Edge Function:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+supabase functions new nome-da-funcao
+supabase functions deploy nome-da-funcao
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Autenticação
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Login via Supabase Auth (e-mail/senha) em `/login`. Sessão é validada e renovada em `src/proxy.ts` (convenção `proxy` do Next.js, que substitui `middleware`).
 
 ## Deploy on Vercel
 
