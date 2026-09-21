@@ -32,6 +32,7 @@ export default async function ClientProfileLayout({
     { label: t.clients.tabs.strategy, href: `${base}/strategy` },
     { label: t.clients.tabs.positioning, href: `${base}/positioning` },
     { label: t.clients.tabs.brandBrain, href: `${base}/brand-brain` },
+    { label: t.clients.tabs.aiWorkspace, href: `${base}/ai-workspace` },
     { label: t.clients.tabs.tasks, href: `${base}/tasks` },
     { label: t.clients.tabs.audit, href: `${base}/audit` },
     { label: t.clients.tabs.documents, href: `${base}/documents`, disabled: true },
