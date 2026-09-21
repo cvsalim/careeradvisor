@@ -35,9 +35,13 @@ export default async function ClientProfileLayout({
     { label: t.clients.tabs.aiWorkspace, href: `${base}/ai-workspace` },
     { label: t.clients.tabs.tasks, href: `${base}/tasks` },
     { label: t.clients.tabs.audit, href: `${base}/audit` },
+    { label: t.clients.tabs.journal, href: `${base}/journal` },
+    { label: t.clients.tabs.content, href: `${base}/content` },
+    { label: t.clients.tabs.careerScore, href: `${base}/career-score` },
+    { label: t.clients.tabs.reports, href: `${base}/reports` },
     { label: t.clients.tabs.documents, href: `${base}/documents`, disabled: true },
-    { label: t.clients.tabs.meetings, href: `${base}/meetings`, disabled: true },
-    { label: t.clients.tabs.decisions, href: `${base}/decisions`, disabled: true },
+    { label: t.clients.tabs.meetings, href: `${base}/meetings` },
+    { label: t.clients.tabs.decisions, href: `${base}/decisions` },
   ];
 
   return (

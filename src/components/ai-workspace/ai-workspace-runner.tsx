@@ -75,7 +75,7 @@ export function AiWorkspaceRunner({
           <pre className="whitespace-pre-wrap rounded-default bg-surface-secondary p-4 font-ui text-[13px] text-text-primary">
             {state.result}
           </pre>
-          <div>
+          <div className="flex flex-wrap gap-2">
             <Button
               type="button"
               variant="secondary"
@@ -90,6 +90,14 @@ export function AiWorkspaceRunner({
             >
               {saved ? t.aiWorkspace.savedLabel : t.aiWorkspace.saveButton}
             </Button>
+            {taskKey === "monthly_report" && state.executionId && (
+              <a
+                href={`/clients/${clientId}/reports?draft=${state.executionId}`}
+                className="inline-flex items-center rounded-default border border-border px-3 py-1.5 font-ui text-[13px] text-text-secondary hover:border-burgundy/50"
+              >
+                {t.monthlyReports.useAiDraft}
+              </a>
+            )}
           </div>
         </div>
       )}

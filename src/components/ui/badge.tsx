@@ -29,6 +29,16 @@ export const STATUS_TONES: Record<string, Tone> = {
   high: "negative",
   medium: "warning",
   low: "neutral",
+  idea: "neutral",
+  briefing: "neutral",
+  script: "warning",
+  in_production: "warning",
+  advisor_review: "warning",
+  client_approval: "warning",
+  published: "positive",
+  analyzed: "positive",
+  proposed: "neutral",
+  shared: "positive",
 };
 
 export function Badge({
