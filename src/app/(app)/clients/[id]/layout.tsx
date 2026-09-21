@@ -42,6 +42,7 @@ export default async function ClientProfileLayout({
     { label: t.clients.tabs.documents, href: `${base}/documents`, disabled: true },
     { label: t.clients.tabs.meetings, href: `${base}/meetings` },
     { label: t.clients.tabs.decisions, href: `${base}/decisions` },
+    { label: t.clients.tabs.resources, href: `${base}/resources` },
   ];
 
   return (

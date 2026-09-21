@@ -49,6 +49,7 @@ export function Sidebar({ locale }: { locale: Locale }) {
         { label: t.nav.market, href: "/market" },
         { label: t.nav.reports, href: "/reports" },
         { label: t.nav.careerScore, href: "/career-score" },
+        { label: t.nav.marketSignals, href: "/market-signals" },
       ],
     },
   ];

@@ -28,6 +28,7 @@ export const dictionaries = {
       market: "Market",
       reports: "Reports",
       careerScore: "Career Score",
+      marketSignals: "Market Signals",
       settings: "Settings",
     },
     topbar: {
@@ -158,6 +159,7 @@ export const dictionaries = {
         documents: "Documents",
         meetings: "Meetings",
         decisions: "Decisions",
+        resources: "External Resources",
       },
       notFound: "Client not found.",
     },
@@ -561,6 +563,60 @@ export const dictionaries = {
       share: "Mark as shared",
       useAiDraft: "Use as monthly report draft",
     },
+    externalResources: {
+      title: "External resources",
+      subtitle: "Links, results and summaries from external tools (ChatGPT, Perplexity, Granola, Canva, etc.).",
+      empty: "No external resources logged yet.",
+      form: {
+        toolName: "Tool",
+        link: "Link",
+        summary: "Summary",
+        submit: "Save resource",
+      },
+    },
+    marketSignals: {
+      title: "Market signals",
+      subtitle: "Manually logged market insights and signals (Perplexity, Google Trends, etc.).",
+      empty: "No signals logged yet.",
+      generalWatchlist: "General watchlist",
+      form: {
+        client: "Client (optional)",
+        noClient: "General (no client)",
+        title: "Title",
+        source: "Source",
+        summary: "Summary",
+        tags: "Tags (comma-separated)",
+        signalDate: "Date",
+        submit: "Save signal",
+      },
+    },
+    portal: {
+      title: "Your career portal",
+      welcome: "Welcome",
+      logout: "Log out",
+      nav: {
+        overview: "Overview",
+        careerScore: "Career Score",
+        reports: "Monthly reports",
+        decisions: "Decisions",
+        content: "Content",
+      },
+      overview: {
+        subtitle: "A read-only summary of your career advisory progress.",
+      },
+      careerScore: {
+        empty: "No career score evaluations shared yet.",
+      },
+      reports: {
+        empty: "No reports have been shared yet.",
+      },
+      decisions: {
+        empty: "No approved decisions yet.",
+      },
+      content: {
+        empty: "No published content yet.",
+      },
+    },
   },
   pt: {
     nav: {
@@ -585,6 +641,7 @@ export const dictionaries = {
       market: "Mercado",
       reports: "Relatórios",
       careerScore: "Career Score",
+      marketSignals: "Sinais de Mercado",
       settings: "Configurações",
     },
     topbar: {
@@ -715,6 +772,7 @@ export const dictionaries = {
         documents: "Documentos",
         meetings: "Reuniões",
         decisions: "Decisões",
+        resources: "Recursos Externos",
       },
       notFound: "Cliente não encontrado.",
     },
@@ -1117,6 +1175,60 @@ export const dictionaries = {
       approve: "Aprovar",
       share: "Marcar como compartilhado",
       useAiDraft: "Usar como rascunho do relatório mensal",
+    },
+    externalResources: {
+      title: "Recursos externos",
+      subtitle: "Links, resultados e resumos de ferramentas externas (ChatGPT, Perplexity, Granola, Canva etc.).",
+      empty: "Nenhum recurso externo registrado ainda.",
+      form: {
+        toolName: "Ferramenta",
+        link: "Link",
+        summary: "Resumo",
+        submit: "Salvar recurso",
+      },
+    },
+    marketSignals: {
+      title: "Sinais de mercado",
+      subtitle: "Registro manual de insights e sinais de mercado (Perplexity, Google Trends etc.).",
+      empty: "Nenhum sinal registrado ainda.",
+      generalWatchlist: "Radar geral",
+      form: {
+        client: "Cliente (opcional)",
+        noClient: "Geral (sem cliente)",
+        title: "Título",
+        source: "Fonte",
+        summary: "Resumo",
+        tags: "Tags (separadas por vírgula)",
+        signalDate: "Data",
+        submit: "Salvar sinal",
+      },
+    },
+    portal: {
+      title: "Seu portal de carreira",
+      welcome: "Bem-vindo(a)",
+      logout: "Sair",
+      nav: {
+        overview: "Visão geral",
+        careerScore: "Career Score",
+        reports: "Relatórios mensais",
+        decisions: "Decisões",
+        content: "Conteúdos",
+      },
+      overview: {
+        subtitle: "Um resumo, apenas leitura, do seu progresso na assessoria de carreira.",
+      },
+      careerScore: {
+        empty: "Nenhuma avaliação de Career Score compartilhada ainda.",
+      },
+      reports: {
+        empty: "Nenhum relatório foi compartilhado ainda.",
+      },
+      decisions: {
+        empty: "Nenhuma decisão aprovada ainda.",
+      },
+      content: {
+        empty: "Nenhum conteúdo publicado ainda.",
+      },
     },
   },
 } as const;

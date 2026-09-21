@@ -31,6 +31,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isAuthRoute = request.nextUrl.pathname.startsWith("/login");
+  const isPortalRoute = request.nextUrl.pathname.startsWith("/portal");
 
   if (!user && !isAuthRoute) {
     const url = request.nextUrl.clone();
@@ -39,6 +40,20 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (user && isAuthRoute) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url);
+  }
+
+  const isPortalUser = user?.user_metadata?.role === "client";
+
+  if (user && isPortalUser && !isPortalRoute) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/portal";
+    return NextResponse.redirect(url);
+  }
+
+  if (user && !isPortalUser && isPortalRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     return NextResponse.redirect(url);
